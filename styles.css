@@ -1,0 +1,226 @@
+/* 霓虹拳魂 NEON FIST SOUL — 页面与触控 UI */
+:root {
+  --cyan: #3df3ff;
+  --magenta: #ff2f8e;
+  --yellow: #ffd23f;
+  --ink: #07050f;
+  --panel: rgba(11, 8, 24, 0.72);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #05030b;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+}
+
+#app {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 90% at 50% 40%, #140b28 0%, #05030b 70%);
+}
+
+#game {
+  display: block;
+  width: min(100vw, calc(100vh * 16 / 9));
+  height: min(100vh, calc(100vw * 9 / 16));
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #0a0614;
+  box-shadow: 0 0 80px rgba(64, 20, 160, 0.55), 0 0 2px rgba(61, 243, 255, 0.6);
+  outline: none;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- 顶部系统按钮 ---------- */
+#topbar {
+  position: absolute;
+  top: max(10px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right));
+  display: flex;
+  gap: 8px;
+  z-index: 30;
+  opacity: 0.62;
+  transition: opacity 0.2s;
+}
+#topbar:hover { opacity: 1; }
+.topbtn {
+  width: 38px;
+  height: 34px;
+  border: 2px solid rgba(61, 243, 255, 0.5);
+  border-radius: 6px;
+  background: rgba(7, 5, 15, 0.72);
+  color: #bff8ff;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  box-shadow: 0 0 10px rgba(61, 243, 255, 0.18), inset 0 0 8px rgba(61, 243, 255, 0.08);
+  font-family: inherit;
+}
+.topbtn:active { transform: translateY(1px); background: rgba(61, 243, 255, 0.2); }
+
+/* ---------- 触控手柄 ---------- */
+#touch-ui {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+}
+
+#stick-zone {
+  position: absolute;
+  left: max(18px, env(safe-area-inset-left));
+  bottom: max(20px, env(safe-area-inset-bottom));
+  width: 190px;
+  height: 190px;
+  pointer-events: auto;
+  touch-action: none;
+}
+#stick-base {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 132px;
+  height: 132px;
+  margin: -66px 0 0 -66px;
+  border-radius: 50%;
+  border: 2px solid rgba(61, 243, 255, 0.38);
+  background: radial-gradient(circle at 50% 45%, rgba(30, 16, 60, 0.72), rgba(8, 6, 18, 0.5));
+  box-shadow: 0 0 22px rgba(61, 243, 255, 0.18), inset 0 0 24px rgba(61, 243, 255, 0.08);
+}
+#stick-ring {
+  position: absolute;
+  inset: 22px;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 47, 142, 0.28);
+}
+#stick-knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  margin: -28px 0 0 -28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 38% 30%, #bafcff, #3df3ff 38%, #157a9c 75%, #0c3d55);
+  box-shadow: 0 0 16px rgba(61, 243, 255, 0.65);
+  will-change: transform;
+}
+
+#buttons {
+  position: absolute;
+  right: max(20px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  width: 250px;
+  height: 210px;
+  pointer-events: none;
+}
+.tbtn {
+  position: absolute;
+  pointer-events: auto;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.32);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: 1px;
+  cursor: pointer;
+  touch-action: none;
+  padding: 0;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.6);
+  transition: transform 0.06s, filter 0.06s;
+}
+.tbtn:active, .tbtn.on { transform: scale(0.93); filter: brightness(1.4); }
+.tbtn-attack {
+  right: 22px;
+  bottom: 26px;
+  width: 86px;
+  height: 86px;
+  font-size: 22px;
+  background: radial-gradient(circle at 38% 30%, #ffd9ec, #ff2f8e 45%, #a1104f 100%);
+  box-shadow: 0 0 24px rgba(255, 47, 142, 0.6);
+}
+.tbtn-jump {
+  right: 120px;
+  bottom: 8px;
+  width: 66px;
+  height: 66px;
+  font-size: 18px;
+  background: radial-gradient(circle at 38% 30%, #d5fffb, #2ec9ff 45%, #0d5c8c 100%);
+  box-shadow: 0 0 18px rgba(46, 201, 255, 0.55);
+}
+.tbtn-heavy {
+  right: 118px;
+  bottom: 104px;
+  width: 64px;
+  height: 64px;
+  font-size: 18px;
+  background: radial-gradient(circle at 38% 30%, #ffe9bc, #ff9a2f 45%, #8c430d 100%);
+  box-shadow: 0 0 18px rgba(255, 154, 47, 0.5);
+}
+.tbtn-special {
+  right: 5px;
+  bottom: 138px;
+  width: 70px;
+  height: 70px;
+  font-size: 16px;
+  background: radial-gradient(circle at 38% 30%, #e9d3ff, #8b3dff 45%, #3a1287 100%);
+  box-shadow: 0 0 22px rgba(139, 61, 255, 0.65);
+}
+
+/* ---------- 竖屏提示 ---------- */
+#rotate-tip {
+  display: none;
+  position: absolute;
+  inset: 0;
+  z-index: 60;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  background: rgba(4, 2, 10, 0.92);
+  color: #d8f8ff;
+  text-align: center;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+#rotate-tip b { font-size: 22px; color: var(--cyan); text-shadow: 0 0 14px rgba(61, 243, 255, 0.8); }
+#rotate-tip span { color: #8d84a8; font-size: 13px; }
+@media (orientation: portrait) and (pointer: coarse) {
+  #rotate-tip { display: flex; }
+}
+
+/* ---------- 错误提示（调试用，正常不可见） ---------- */
+#error-box {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  transform: translateX(-50%);
+  max-width: 88vw;
+  max-height: 60vh;
+  overflow: auto;
+  z-index: 99;
+  padding: 14px 18px;
+  border: 2px solid #ff3b5c;
+  border-radius: 8px;
+  background: rgba(20, 0, 8, 0.94);
+  color: #ffd9e2;
+  font: 13px/1.5 Consolas, monospace;
+  white-space: pre-wrap;
+  text-align: left;
+}
