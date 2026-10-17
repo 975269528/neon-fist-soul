@@ -2,6 +2,8 @@
 
 赛博霓虹夜巷里的横板像素街机清版动作游戏。纯 HTML5 Canvas 实现，**无需安装、无需构建、无需联网**——双击 `index.html` 即可开打。
 
+**在线试玩**：<https://975269528.github.io/neon-fist-soul/>
+
 ![标题画面](shots/final_title.png)
 
 ## 快速开始
